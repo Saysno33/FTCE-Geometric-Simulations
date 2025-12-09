@@ -23,7 +23,7 @@ $$\text{REALITY} (S) = \text{CONSCIOUSNESS} (C) \times \text{MATHEMATICS} (I) \t
 
 **¡El dinero es el respeto!** Any entity or party commercializing a product, service, or technology based on the FTCE IP, including the software and hardware components, is required to comply with the creator's Mandatory Commercial Rider.
 
-* **RIDER AMOUNT:** A **Thirty Percent (30%) Rider** of the **Gross Revenue** derived from the sale, lease, network service, or operation of such technology must be remitted to the Licensor (**[Your Designated LLC/Holdings Name]**). This is a non-negotiable, explicit, mandatory condition of the license grant and supersedes any prior lower claims.
+* **RIDER AMOUNT:** A **Thirty Percent (30%) Rider** of the **Gross Revenue** derived from the sale, lease, network service, or operation of such technology must be remitted to the Licensor (**FTCE Nexus Holdings LLC]**). This is a non-negotiable, explicit, mandatory condition of the license grant and supersedes any prior lower claims.
 
 ### 🛡️ CONTROL RIGHTS AND REMOTE GOVERNANCE
 

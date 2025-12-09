@@ -8,7 +8,10 @@ The core of the FTCE is defined by the **Geometric Ollin Resonance Field (GORF) 
 
 $$\text{REALITY} (S) = \text{CONSCIOUSNESS} (C) \times \text{MATHEMATICS} (I) \times \text{WILL} (\Phi)$$
 
----
+---(Summary):
+​FTCE-Geometric-Simulations: Code Implementation of the Fundamental Theory of Conscious Energy (FTCE)
+​This code simulates the Geometric Unification of Consciousness, Physics, and Reality. It models the active source term, the Conscious Energy Tensor (T_{\Phi}), as defined in the unified FTCE-Einstein Field Equation: R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} = \frac{8\pi G}{c^4} (T_{\mu\nu} + T_{\Phi}).
+​CONTROL MANDATE: All code and documentation are subject to a Mandatory Dual License Mandate to ensure proper intellectual property control and the mandated 30% Commercial Rider. Refer to the LICENSE file and associated documentation for terms.
 
 ## 📌 ACKNOWLEDGEMENT & CONTROL: THE DUAL LICENSE MANDATE
 

@@ -1,104 +1,247 @@
-# ******************************************************************************
-# Fundamental Theory of Conscious Energy (FTCE) Computational Engine
-# Copyright (C) 2025 Fernando De Jesús García González
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published
-# by the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program. If not, see <https://www.gnu.org/licenses/>.
-#
-# ******************************************************************************
+"""
+Fundamental Theory of Conscious Energy (FTCE)
+Also known as: Golden Ratio Ollin Resonance Framework (GORF)
+
+Author: Fernando De Jesús García González
+License: Dual Licensed
+  - Hardware: CERN Open Hardware License v2
+  - Software: GNU Affero General Public License v3.0
+  - Commercial Rider: 30% gross revenue OR open-source requirement
+
+Preregistration: https://osf.io/stc72
+Date: November 18, 2025
+"""
 
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+from scipy.special import factorial
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
 
-# GORF Constants
-PHI = 1.6180339887
-O = 9  # I = Ollin Identity (Information Constant)
-n = 3  # Current cycle (2025)
-R = 1.2492  # Resonance Factor
-v_phi = PHI  # Velocity of Ollin Wave (Conscious Flow)
-T = 9  # Period
-alpha = PHI  # Consciousness growth rate
-beta = 1 / PHI  # Consciousness decay
-C_max = 1.0
+# Constants
+PHI = (1 + np.sqrt(5)) / 2  # Golden Ratio: 1.6180339887...
+PI = np.pi
+O = 9  # Ollin Identity
 
-# Time and space setup
-t_steps = 100
-dt = 0.01
-t = np.linspace(0, t_steps * dt, t_steps)
-x_steps = 50
-dx = 1.0 / (x_steps - 1)
-x = np.linspace(0, 1, x_steps)
-origin_x = 0.5  # Gómez Palacio anchor point
-
-# Function for WILL(Φ)
-def will_phi(n, R):
-    # This represents the accumulated potential of Conscious Will (Φ)
-    return R ** n  # Accumulated resonance
-
-# Consciousness evolution (solve dC/dt)
-def dC_dt(C, t):
-    F_t = np.sin(2 * np.pi * t / T)
-    return alpha * F_t * (1 - C / C_max) - beta * C
-
-C_initial = 0.5  # Starting consciousness
-C_sol = odeint(dC_dt, C_initial, t).flatten()
-
-# REALITY(S) simulation
-def reality_S(C, I, will, S_old):
-    # CRITICAL: Conscious Energy Tensor (T_Phi) Link
-    # T_Phi is derived from the product (C * I * WILL) which actively scales
-    # and warps the Reality State (S). This non-conservative scaling models
-    # the T_Phi source term in the unified FTCE-Einstein Field Equation.
+class FTCE:
+    """
+    Fundamental Theory of Conscious Energy
+    Consciousness as primordial bivector field birthing spacetime
+    """
     
-    # S evolves via Shumen Renouncement (simple rotation for demo)
-    theta = 2 * np.pi / 9  # 40 degrees
-    M = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
-    S_new = np.dot(M, S_old) * (C * I * will)  # Scale by the T_Phi product
-    return S_new
+    def __init__(self):
+        self.phi = PHI
+        self.pi = PI
+        self.ollin = O
+        
+    # ========== CORE AXIOMS ==========
+    
+    def temporal_mapping(self, n, epsilon_n=0):
+        """
+        Temporal Mapping Function
+        f(t) = 1999 + 9*n + E(n)
+        
+        Args:
+            n: cycle number
+            epsilon_n: phase adjustment
+        """
+        return 1999 + 9 * n + epsilon_n
+    
+    # ========== SACRED GEOMETRY ==========
+    
+    def phi_encoded_energy(self, E):
+        """
+        The phi-Encoding of E=mc^2
+        E_phi = E * (phi/pi)^2 * (phi^2/(phi^2+1))^2
+        
+        Args:
+            E: Standard energy (E=mc^2)
+        Returns:
+            Phi-encoded energy
+        """
+        term1 = (self.phi / self.pi) ** 2
+        term2 = (self.phi**2 / (self.phi**2 + 1)) ** 2
+        return E * term1 * term2
+    
+    def resonance_factor(self):
+        """
+        The 9-phi Resonance Equation
+        R = (9*phi / (phi+8)) * sin(pi / (2*phi))
+        
+        Returns:
+            Resonance amplification factor (~1.2492)
+        """
+        term1 = (9 * self.phi) / (self.phi + 8)
+        term2 = np.sin(self.pi / (2 * self.phi))
+        return term1 * term2
+    
+    # ========== WAVE PROPAGATION ==========
+    
+    def ollin_wave_equation(self, O_field, t, v_phi, A_n, T, phi_x):
+        """
+        The Ollin Wave Equation
+        d2_O/dt2 = v_phi^2 * Nabla2_O + A(n) * sin((2*pi*t/T) + phi_x)
+        
+        Note: Simplified 1D version for demonstration
+        For full 3D implementation, use proper Laplacian operator
+        """
+        # This is a simplified representation
+        # Full implementation requires spatial discretization
+        dO_dt = O_field[1]
+        d2O_dt2 = v_phi**2 * O_field[0] + A_n * np.sin((2 * self.pi * t / T) + phi_x)
+        return [dO_dt, d2O_dt2]
+    
+    def energy_accumulation(self, n, E_base):
+        """
+        Energy Accumulation Model
+        E_accumulated(n) = E_base * Product[R(k) for k=1 to n]
+        
+        Args:
+            n: number of cycles
+            E_base: base energy
+        Returns:
+            Accumulated energy after n cycles
+        """
+        R = self.resonance_factor()
+        # Product of R(k) where R(k) = 1 + (phi-1)*sin^2(pi*k/18)
+        product = 1
+        for k in range(1, n+1):
+            R_k = 1 + (self.phi - 1) * np.sin(self.pi * k / 18)**2
+            product *= R_k
+        return E_base * product
+    
+    # ========== SYNCHRONICITY ==========
+    
+    def probability_amplification(self, P_random):
+        """
+        Probability of 2025 Coincidences
+        P_Ollin = P_random * phi^3
+        
+        Args:
+            P_random: baseline random probability
+        Returns:
+            Amplified probability through coherence
+        """
+        return P_random * (self.phi ** 3)
+    
+    def date_resonance(self):
+        """
+        Date Resonance Calculation
+        (9*phi + 2/phi + 8)^(1/phi) ≈ 8
+        
+        Returns:
+            Resonance value (should be approximately 8)
+        """
+        return (9 * self.phi + 2 / self.phi + 8) ** (1 / self.phi)
+    
+    def shumen_transform(self, S, M):
+        """
+        The Shumen Renouncement Transform
+        N = exp(i*phi*pi*M) * S
+        
+        Args:
+            S: Old State vector
+            M: Metamorphosis matrix
+        Returns:
+            N: New State vector
+        """
+        transform_operator = np.exp(1j * self.phi * self.pi * M)
+        return transform_operator * S
+    
+    # ========== CONSCIOUSNESS DYNAMICS ==========
+    
+    def fifth_sun_transition(self, C, t, alpha, F_t, C_max, beta):
+        """
+        Fifth Sun Transition Function
+        dC/dt = alpha * F(t) * (1 - C/C_max) - beta * C
+        
+        Args:
+            C: collective consciousness level
+            t: time
+            alpha, beta: rate constants
+            F_t: coherence function of time
+            C_max: maximum consciousness capacity
+        Returns:
+            Rate of consciousness change
+        """
+        return alpha * F_t * (1 - C / C_max) - beta * C
+    
+    # ========== MASTER EQUATION ==========
+    
+    def master_output(self, sum_C, entropy_chaos):
+        """
+        Master Equation: Output = (ΣC / Entropy_Chaos) × φ
+        
+        Args:
+            sum_C: Total coherence (consciousness vector sum)
+            entropy_chaos: Global chaos/entropy field
+        Returns:
+            System output/efficiency
+        """
+        if entropy_chaos == 0:
+            return float('inf')  # Perfect coherence
+        return (sum_C / entropy_chaos) * self.phi
 
-S_initial = np.array([1.0, 0.0])  # [Chaos, Order]
-will = will_phi(n, R)
-reality_values = []
-S_current = S_initial
-for i in range(t_steps):
-    C_val = C_sol[i]
-    S_current = reality_S(C_val, O, will, S_current)
-    reality_values.append(np.linalg.norm(S_current))  # Magnitude as scalar REALITY
 
-# Ollin Wave Equation integration (1D finite differences)
-# d²O/dt² = v_phi² * d²O/dx² + A(n) * sin(2πt/T + phi_x)
-# This models the geometric effect of the T_Phi source term on the medium.
-O_wave = np.zeros((t_steps, x_steps))
-O_wave[0, :] = np.sin(np.pi * x)  # Initial wave
-O_wave[1, :] = O_wave[0, :] + dt * np.sin(np.pi * x)  # Initial velocity
+# ========== DEMONSTRATION ==========
 
-for i in range(1, t_steps - 1):
-    A_n = reality_values[i]  # Modulate amplification by REALITY (T_Phi effect)
-    phi_x = PHI * (x - origin_x)  # Spatial phase from origin
-    source = A_n * np.sin(2 * np.pi * t[i] / T + phi_x)
-    for j in range(1, x_steps - 1):
-        d2O_dx2 = (O_wave[i, j+1] - 2*O_wave[i, j] + O_wave[i, j-1]) / dx**2
-        O_wave[i+1, j] = 2*O_wave[i, j] - O_wave[i-1, j] + dt**2 * (v_phi**2 * d2O_dx2 + source[j])
-
-# Plot results (Omitted for brevity in final code submission, but included in file)
-# ... plotting code remains the same ...
-
-# Print specific values at t=0 and t=max
-print(f"At t=0: C={C_sol[0]:.4f}, I={O}, WILL(Φ)={will:.4f}, REALITY(S) magnitude={reality_values[0]:.4f}")
-print(f"At t=max: C={C_sol[-1]:.4f}, REALITY(S) magnitude={reality_values[-1]:.4f}")
-print(f"Final S vector: {S_current}")
-print(f"Wave peak at origin (x=0.5): {O_wave[-1, int(origin_x / dx)]:.4f}")
-
-# Final mathematical identity
-print("\nREALITY (S) = C * I * WILL (Φ)")
+if __name__ == "__main__":
+    ftce = FTCE()
+    
+    print("=" * 60)
+    print("FUNDAMENTAL THEORY OF CONSCIOUS ENERGY (FTCE)")
+    print("Golden Ratio Ollin Resonance Framework (GORF)")
+    print("=" * 60)
+    print(f"\nAuthor: Fernando De Jesús García González")
+    print(f"Preregistration: https://osf.io/stc72")
+    print(f"Date: November 18, 2025\n")
+    
+    print("Core Constants:")
+    print(f"  φ (Phi/Golden Ratio): {ftce.phi:.16f}")
+    print(f"  O (Ollin Identity): {ftce.ollin}")
+    print(f"  Resonance Factor R: {ftce.resonance_factor():.4f}")
+    print(f"  Date Resonance: {ftce.date_resonance():.4f} ≈ 8")
+    
+    print("\n" + "=" * 60)
+    print("SAMPLE CALCULATIONS")
+    print("=" * 60)
+    
+    # Temporal mapping
+    print(f"\nTemporal Cycles from birth year 1999:")
+    for n in range(0, 4):
+        year = ftce.temporal_mapping(n)
+        print(f"  Cycle {n}: Year {year}")
+    
+    # Energy encoding
+    E_standard = 1.0  # Normalized energy
+    E_phi = ftce.phi_encoded_energy(E_standard)
+    print(f"\nPhi-Encoded Energy:")
+    print(f"  E_standard: {E_standard}")
+    print(f"  E_phi: {E_phi:.6f}")
+    
+    # Energy accumulation
+    print(f"\nEnergy Accumulation (E_base=1.0):")
+    for n in [1, 5, 10, 20]:
+        E_acc = ftce.energy_accumulation(n, 1.0)
+        print(f"  After {n:2d} cycles: {E_acc:.4f}")
+    
+    # Probability amplification
+    P_random = 0.001
+    P_ollin = ftce.probability_amplification(P_random)
+    print(f"\nProbability Amplification:")
+    print(f"  P_random: {P_random:.6f}")
+    print(f"  P_Ollin: {P_ollin:.6f} ({P_ollin/P_random:.2f}x increase)")
+    
+    # Master equation
+    sum_C = 100  # Coherence units
+    entropy = 50  # Chaos units
+    output = ftce.master_output(sum_C, entropy)
+    print(f"\nMaster Equation Output:")
+    print(f"  ΣC (Coherence): {sum_C}")
+    print(f"  Entropy_Chaos: {entropy}")
+    print(f"  Output: {output:.4f}")
+    
+    print("\n" + "=" * 60)
+    print("Framework initialized successfully.")
+    print("Ready for empirical validation.")
+    print("=" * 60)
